@@ -41,7 +41,6 @@ export const Home = () => {
 		<div className="text-center mt-5">
 		  <h1>Welcome to Starwarspedia!</h1>
 	  
-		  {/* People Section */}
 		  <div className="mb-4">
 			<h2>Characters:</h2>
 			<div className="d-flex overflow-auto">
@@ -57,7 +56,6 @@ export const Home = () => {
 			</div>
 		  </div>
 	  
-		  {/* Planets Section */}
 		  <div className="mb-4">
 			<h2>Planets:</h2>
 			<div className="d-flex overflow-auto">
@@ -73,7 +71,6 @@ export const Home = () => {
 			</div>
 		  </div>
 	  
-		  {/* Starships Section */}
 		  <div className="mb-4">
 			<h2>Starships:</h2>
 			<div className="d-flex overflow-auto">
