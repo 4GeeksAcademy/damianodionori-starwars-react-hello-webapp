@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import EntityCard from "./entitycard.js"
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -34,36 +35,59 @@ export const Home = () => {
 
 	console.log(store);
 
-	return isLoading ? (<p>App's loading data from the API, please wait...</p>) : (
+	return isLoading ? (
+		<p>App's loading data from the API, please wait...</p>
+	  ) : (
 		<div className="text-center mt-5">
-			<h1>Hello Starwars!</h1>
-			<div>
-				<h2>People:</h2>
-				{store.people.map((person) => (
-					<div key={person.uid}>
-						<p>{person.name}</p>
-						<Link to={`/information/people/${person.uid}`}><button className="btn btn-primary">Go person's details</button></Link>
-					</div>
-				))}
+		  <h1>Hello Starwars!</h1>
+	  
+		  {/* People Section */}
+		  <div className="mb-4">
+			<h2>Characters:</h2>
+			<div className="d-flex overflow-auto">
+			  {store.people.map((person) => (
+				<EntityCard
+				  key={person.uid}
+				  uid={person.uid}
+				  name={person.name}
+				  linkPath="people"
+				  buttonText="Go person's details"
+				/>
+			  ))}
 			</div>
-			<div>
-				<h2>Planets:</h2>
-				{store.planets.map((planet) => (
-					<div key={planet.uid}>
-						<p>{planet.name}</p>
-						<Link to={`/information/planets/${planet.uid}`}><button className="btn btn-primary">Go planet's details</button></Link>
-					</div>
-				))}
+		  </div>
+	  
+		  {/* Planets Section */}
+		  <div className="mb-4">
+			<h2>Planets:</h2>
+			<div className="d-flex overflow-auto">
+			  {store.planets.map((planet) => (
+				<EntityCard
+				  key={planet.uid}
+				  uid={planet.uid}
+				  name={planet.name}
+				  linkPath="planets"
+				  buttonText="Go planet's details"
+				/>
+			  ))}
 			</div>
-			<div>
-				<h2>Starships:</h2>
-				{store.starships.map((starship) => (
-					<div key={starship.uid}>
-						<p>{starship.name}</p>
-						<Link to={`/information/starships/${starship.uid}`}><button className="btn btn-primary">Go starship's details</button></Link>
-					</div>
-				))}
+		  </div>
+	  
+		  {/* Starships Section */}
+		  <div className="mb-4">
+			<h2>Starships:</h2>
+			<div className="d-flex overflow-auto">
+			  {store.starships.map((starship) => (
+				<EntityCard
+				  key={starship.uid}
+				  uid={starship.uid}
+				  name={starship.name}
+				  linkPath="starships"
+				  buttonText="Go starship's details"
+				/>
+			  ))}
 			</div>
+		  </div>
 		</div>
-	);
+	  );
 };

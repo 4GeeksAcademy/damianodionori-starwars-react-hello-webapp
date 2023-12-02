@@ -13,9 +13,7 @@ export const Navbar = () => {
 					</button></span>
 			</Link>
 			<div className="ml-auto">
-				<Link to="/contacts">
-					<button className="btn btn-primary" id="contact" >Contact List</button>
-				</Link>
+				<button className="btn btn-primary" id="contact" >Favorites</button>
 			</div>
 		</nav>
 	);

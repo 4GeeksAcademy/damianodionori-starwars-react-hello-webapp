@@ -11,32 +11,38 @@ export const Information = () => {
 
     console.log("entity", entityData);
 
-    return (<>
-        {kind === "people" && (
-            <div>
-                <p>Name: {entityData.name}</p>
-                <p>Skin color: {entityData.details.properties.skin_color}</p>
-                <p>Mass: {entityData.details.properties.mass}</p>
-                <p>Height: {entityData.details.properties.height}</p>
-            </div>
-        )}
-        {kind === "planets" && (
-            <div>
-                <p>Name: {entityData.name}</p>
-                <p>Gravity: {entityData.details.properties.gravity}</p>
-                <p>Population: {entityData.details.properties.population}</p>
-                <p>Terrain: {entityData.details.properties.terrain}</p>
-                <p>Climate: {entityData.details.properties.climate}</p>
-            </div>
-        )}
-        {kind === "starships" && (
-            <div>
-                <p>Name: {entityData.name}</p>
-                <p>Crew: {entityData.details.properties.crew}</p>
-                <p>Length: {entityData.details.properties.length}</p>
-                <p>Model: {entityData.details.properties.model}</p>
-                <p>Starship Class: {entityData.details.properties.starship_class}</p>
-            </div>
-        )}
-    </>);
+    return (
+        <>
+            {entityData && (
+                <>
+                    {kind === "people" && (
+                        <div>
+                            <p>Name: {entityData.name}</p>
+                            <p>Skin color: {entityData.details.properties.skin_color}</p>
+                            <p>Mass: {entityData.details.properties.mass}</p>
+                            <p>Height: {entityData.details.properties.height}</p>
+                        </div>
+                    )}
+                    {kind === "planets" && (
+                        <div>
+                            <p>Name: {entityData.name}</p>
+                            <p>Gravity: {entityData.details.properties.gravity}</p>
+                            <p>Population: {entityData.details.properties.population}</p>
+                            <p>Terrain: {entityData.details.properties.terrain}</p>
+                            <p>Climate: {entityData.details.properties.climate}</p>
+                        </div>
+                    )}
+                    {kind === "starships" && (
+                        <div>
+                            <p>Name: {entityData.name}</p>
+                            <p>Crew: {entityData.details.properties.crew}</p>
+                            <p>Length: {entityData.details.properties.length}</p>
+                            <p>Model: {entityData.details.properties.model}</p>
+                            <p>Starship Class: {entityData.details.properties.starship_class}</p>
+                        </div>
+                    )}
+                </>
+            )}
+        </>
+    );
 };
