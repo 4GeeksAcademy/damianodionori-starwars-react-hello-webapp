@@ -21,6 +21,7 @@ export const Information = () => {
                             <p>Skin color: {entityData.details.properties.skin_color}</p>
                             <p>Mass: {entityData.details.properties.mass}</p>
                             <p>Height: {entityData.details.properties.height}</p>
+                            <p>{entityData.details.description}</p>
                         </div>
                     )}
                     {kind === "planets" && (
@@ -30,6 +31,7 @@ export const Information = () => {
                             <p>Population: {entityData.details.properties.population}</p>
                             <p>Terrain: {entityData.details.properties.terrain}</p>
                             <p>Climate: {entityData.details.properties.climate}</p>
+                            <p>{entityData.details.description}</p>
                         </div>
                     )}
                     {kind === "starships" && (
@@ -39,6 +41,7 @@ export const Information = () => {
                             <p>Length: {entityData.details.properties.length}</p>
                             <p>Model: {entityData.details.properties.model}</p>
                             <p>Starship Class: {entityData.details.properties.starship_class}</p>
+                            <p>{entityData.details.description}</p>
                         </div>
                     )}
                 </>

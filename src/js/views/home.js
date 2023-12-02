@@ -39,7 +39,7 @@ export const Home = () => {
 		<p>App's loading data from the API, please wait...</p>
 	  ) : (
 		<div className="text-center mt-5">
-		  <h1>Hello Starwars!</h1>
+		  <h1>Welcome to Starwarspedia!</h1>
 	  
 		  {/* People Section */}
 		  <div className="mb-4">
@@ -51,7 +51,7 @@ export const Home = () => {
 				  uid={person.uid}
 				  name={person.name}
 				  linkPath="people"
-				  buttonText="Go person's details"
+				  buttonText="Go to person's details"
 				/>
 			  ))}
 			</div>
@@ -67,7 +67,7 @@ export const Home = () => {
 				  uid={planet.uid}
 				  name={planet.name}
 				  linkPath="planets"
-				  buttonText="Go planet's details"
+				  buttonText="Go to planet's details"
 				/>
 			  ))}
 			</div>
@@ -83,7 +83,7 @@ export const Home = () => {
 				  uid={starship.uid}
 				  name={starship.name}
 				  linkPath="starships"
-				  buttonText="Go starship's details"
+				  buttonText="Go to starship's details"
 				/>
 			  ))}
 			</div>
