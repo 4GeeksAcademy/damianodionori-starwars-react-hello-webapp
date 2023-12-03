@@ -36,14 +36,14 @@ export const Home = () => {
 	console.log(store);
 
 	return isLoading ? (
-		<p>App's loading data from the API, please wait...</p>
+		<p className="text-center">App's loading data from the API, please wait...</p>
 	  ) : (
 		<div className="text-center mt-5">
 		  <h1>Welcome to Starwarspedia!</h1>
 	  
-		  <div className="mb-4">
+		  <div className="m-3 p-3">
 			<h2>Characters:</h2>
-			<div className="d-flex overflow-auto">
+			<div className="d-flex overflow-auto ">
 			  {store.people.map((person) => (
 				<EntityCard
 				  key={person.uid}
@@ -56,7 +56,7 @@ export const Home = () => {
 			</div>
 		  </div>
 	  
-		  <div className="mb-4">
+		  <div className="m-3 p-3">
 			<h2>Planets:</h2>
 			<div className="d-flex overflow-auto">
 			  {store.planets.map((planet) => (
@@ -71,7 +71,7 @@ export const Home = () => {
 			</div>
 		  </div>
 	  
-		  <div className="mb-4">
+		  <div className="m-3 p-3">
 			<h2>Starships:</h2>
 			<div className="d-flex overflow-auto">
 			  {store.starships.map((starship) => (
