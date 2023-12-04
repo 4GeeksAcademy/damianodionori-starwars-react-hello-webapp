@@ -7,7 +7,10 @@ const EntityCard = ({ uid, name, linkPath, buttonText }) => {
   const [isFavorite, setFavorite] = useState(false);
 
   const handleFavoriteClick = () => {
+    // Toggle local favorite state
     setFavorite((prevFavorite) => !prevFavorite);
+  
+    // Add or remove item from favorites in the global state
     const itemToAddOrRemove = { uid, name, linkPath, buttonText };
     actions.addToFavorites(itemToAddOrRemove);
   };

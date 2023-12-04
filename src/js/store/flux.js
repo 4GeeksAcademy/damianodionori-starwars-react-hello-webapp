@@ -61,11 +61,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addToFavorites: (item) => {
 				const store = getStore();
 				const updatedFavorites = [...store.favorites];
-				const existingIndex = updatedFavorites.findIndex((fav) => fav.uid === item.uid);
+				const { uid, linkPath } = item;
+				const existingIndex = updatedFavorites.findIndex((fav) => fav.uid === uid && fav.linkPath === linkPath);
+
 				if (existingIndex !== -1) {
-					updatedFavorites.splice(existingIndex, 1);
+					updatedFavorites.splice(existingIndex, 1); // Remove item from favorites
 				} else {
-					updatedFavorites.push(item);
+					updatedFavorites.push(item); // Add item to favorites
 				}
 
 				setStore({ ...store, favorites: updatedFavorites });
