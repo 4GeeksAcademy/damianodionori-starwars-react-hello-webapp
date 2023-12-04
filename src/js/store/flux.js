@@ -60,9 +60,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addToFavorites: (item) => {
 				const store = getStore();
-				const updatedFavorites = [...store.favorites, item];
+				const updatedFavorites = [...store.favorites];
+				const existingIndex = updatedFavorites.findIndex((fav) => fav.uid === item.uid);
+				if (existingIndex !== -1) {
+					updatedFavorites.splice(existingIndex, 1);
+				} else {
+					updatedFavorites.push(item);
+				}
+
 				setStore({ ...store, favorites: updatedFavorites });
-			  },
+			},
 		}
 	};
 };

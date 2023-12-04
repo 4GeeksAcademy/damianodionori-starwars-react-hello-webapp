@@ -7,11 +7,11 @@ const EntityCard = ({ uid, name, linkPath, buttonText }) => {
   const [isFavorite, setFavorite] = useState(false);
 
   const handleFavoriteClick = () => {
-    // Add logic to handle adding to favorites
     setFavorite((prevFavorite) => !prevFavorite);
-    actions.addToFavorites({ uid, name, linkPath, buttonText });
+    const itemToAddOrRemove = { uid, name, linkPath, buttonText };
+    actions.addToFavorites(itemToAddOrRemove);
   };
-  
+
   return (
     <div className="col-md-4 p-4 m-3">
       <div className="card border">

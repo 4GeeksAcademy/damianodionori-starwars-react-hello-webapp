@@ -16,27 +16,28 @@ export const Navbar = () => {
 					</button></span>
 			</Link>
 			<div className="ml-auto">
-				<div className="btn-group">
+				<div className="dropdown">
 					<button
 						type="button"
 						className="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown"
-						aria-haspopup="true"
+						id="dropdownMenuButton1"
+						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
 						Favorites
 					</button>
-					<div className="dropdown-menu">
+					<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 						{store.favorites.map((favorite, index) => (
-							<Link
-								to={`/information/${favorite.linkPath}/${favorite.uid}`}
-								className="dropdown-item"
-								key={index}
-							>
-								{favorite.name}
-							</Link>
+							<li key={index}>
+								<Link
+									to={`/information/${favorite.linkPath}/${favorite.uid}`}
+									className="dropdown-item"
+								>
+									{favorite.name}
+								</Link>
+							</li>
 						))}
-					</div>
+					</ul>
 				</div>
 			</div>
 		</nav>
