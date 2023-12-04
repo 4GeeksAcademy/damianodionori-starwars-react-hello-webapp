@@ -1,9 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			people: [], // store["people"].find(...)
-			planets: [], // store["planets"].find(...)
-			starships: [],// store["starships"].find(...)
+			people: [],
+			planets: [],
+			starships: [],
 			favorites: [],
 		},
 		actions: {
@@ -58,6 +58,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ ...store, starships: newStarshipsWithDetails });
 			},
+			addToFavorites: (item) => {
+				const store = getStore();
+				const updatedFavorites = [...store.favorites, item];
+				setStore({ ...store, favorites: updatedFavorites });
+			  },
 		}
 	};
 };

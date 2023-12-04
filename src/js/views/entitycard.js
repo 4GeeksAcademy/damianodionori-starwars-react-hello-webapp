@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Context } from '../store/appContext';
 
 const EntityCard = ({ uid, name, linkPath, buttonText }) => {
+  const { actions } = useContext(Context);
   const [isFavorite, setFavorite] = useState(false);
 
   const handleFavoriteClick = () => {
     // Add logic to handle adding to favorites
     setFavorite((prevFavorite) => !prevFavorite);
+    actions.addToFavorites({ uid, name, linkPath, buttonText });
   };
+  
   return (
     <div className="col-md-4 p-4 m-3">
       <div className="card border">

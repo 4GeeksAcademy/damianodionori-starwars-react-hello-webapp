@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import EntityCard from "./entitycard.js"
+import EntityCard from "./entitycard.js";
 import "../../styles/home.css";
 
 export const Home = () => {
