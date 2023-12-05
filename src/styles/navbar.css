@@ -7,3 +7,7 @@
     width: 30px;
     height: 30px;
 }
+
+.mt-navbar {
+    margin-top: 100px; /* Adjust this value based on your navbar height */
+  }

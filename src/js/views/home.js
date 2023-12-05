@@ -36,9 +36,9 @@ export const Home = () => {
 	console.log(store);
 
 	return isLoading ? (
-		<p className="text-center">App's loading data from the API, please wait...</p>
+		<p className="text-center mt-navbar">App's loading data from the API, please wait...</p>
 	) : (
-		<div className="text-center mt-5">
+		<div className="text-center mt-navbar">
 			<h1 className="display-3 mb-4">Welcome to Starwarspedia!</h1>
 
 			<div className="m-3 p-3">
