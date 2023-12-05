@@ -8,7 +8,7 @@ export const Navbar = () => {
 
 	const handleRemoveFavorite = (uid, linkPath) => {
 		actions.removeFromFavorites(uid, linkPath);
-	  };
+	};
 
 	return (
 		<nav className="navbar navbar-light bg-dark mb-3">
@@ -48,7 +48,10 @@ export const Navbar = () => {
 									</Link>
 									<span
 										className="text-danger cursor-pointer"
-										onClick={() => handleRemoveFavorite(favorite.uid, favorite.linkPath)}
+										onClick={(e) => {
+											e.stopPropagation();
+											handleRemoveFavorite(favorite.uid, favorite.linkPath)
+										}}
 									>
 										<img
 											className="trashCan"
