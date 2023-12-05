@@ -37,54 +37,54 @@ export const Home = () => {
 
 	return isLoading ? (
 		<p className="text-center">App's loading data from the API, please wait...</p>
-	  ) : (
+	) : (
 		<div className="text-center mt-5">
-		  <h1>Welcome to Starwarspedia!</h1>
-	  
-		  <div className="m-3 p-3">
-			<h2>Characters:</h2>
-			<div className="d-flex overflow-auto ">
-			  {store.people.map((person) => (
-				<EntityCard
-				  key={person.uid}
-				  uid={person.uid}
-				  name={person.name}
-				  linkPath="people"
-				  buttonText="Go to person's details"
-				/>
-			  ))}
+			<h1>Welcome to Starwarspedia!</h1>
+
+			<div className="m-3 p-3">
+				<h2>Characters:</h2>
+				<div className="d-flex overflow-auto ">
+					{store.people.map((person) => (
+						<EntityCard
+							key={person.uid}
+							uid={person.uid}
+							name={person.name}
+							linkPath="people"
+							buttonText="Go to person's details"
+						/>
+					))}
+				</div>
 			</div>
-		  </div>
-	  
-		  <div className="m-3 p-3">
-			<h2>Planets:</h2>
-			<div className="d-flex overflow-auto">
-			  {store.planets.map((planet) => (
-				<EntityCard
-				  key={planet.uid}
-				  uid={planet.uid}
-				  name={planet.name}
-				  linkPath="planets"
-				  buttonText="Go to planet's details"
-				/>
-			  ))}
+
+			<div className="m-3 p-3">
+				<h2>Planets:</h2>
+				<div className="d-flex overflow-auto">
+					{store.planets.map((planet) => (
+						<EntityCard
+							key={planet.uid}
+							uid={planet.uid}
+							name={planet.name}
+							linkPath="planets"
+							buttonText="Go to planet's details"
+						/>
+					))}
+				</div>
 			</div>
-		  </div>
-	  
-		  <div className="m-3 p-3">
-			<h2>Starships:</h2>
-			<div className="d-flex overflow-auto">
-			  {store.starships.map((starship) => (
-				<EntityCard
-				  key={starship.uid}
-				  uid={starship.uid}
-				  name={starship.name}
-				  linkPath="starships"
-				  buttonText="Go to starship's details"
-				/>
-			  ))}
+
+			<div className="m-3 p-3">
+				<h2>Starships:</h2>
+				<div className="d-flex overflow-auto">
+					{store.starships.map((starship) => (
+						<EntityCard
+							key={starship.uid}
+							uid={starship.uid}
+							name={starship.name}
+							linkPath="starships"
+							buttonText="Go to starship's details"
+						/>
+					))}
+				</div>
 			</div>
-		  </div>
 		</div>
-	  );
+	);
 };

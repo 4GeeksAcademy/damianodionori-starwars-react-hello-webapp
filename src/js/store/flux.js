@@ -1,4 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
+
 	return {
 		store: {
 			people: [],
@@ -13,18 +14,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const jsonResponse = await textResponse.json();
 				setStore({ ...store, people: jsonResponse.results });
 			},
+
 			getPlanets: async () => {
 				const store = getStore();
 				const textResponse = await fetch("https://www.swapi.tech/api/planets")
 				const jsonResponse = await textResponse.json();
 				setStore({ ...store, planets: jsonResponse.results });
 			},
+
 			getStarships: async () => {
 				const store = getStore();
 				const textResponse = await fetch("https://www.swapi.tech/api/starships");
 				const jsonResponse = await textResponse.json();
 				setStore({ ...store, starships: jsonResponse.results });
 			},
+
 			getPeopleDetails: async () => {
 				const store = getStore();
 
@@ -36,6 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ ...store, people: newPeopleWithDetails });
 			},
+
 			getPlanetsDetails: async () => {
 				const store = getStore();
 
@@ -72,7 +77,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ ...store, favorites: updatedFavorites });
 			},
-		}
+			removeFromFavorites: (uid, linkPath) => {
+				const store = getStore();
+				const updatedFavorites = store.favorites.filter((favorite) => !(favorite.uid === uid && favorite.linkPath === linkPath));
+			  
+				setStore({ ...store, favorites: updatedFavorites });
+			  
+				localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+			  },
+		},
 	};
 };
 

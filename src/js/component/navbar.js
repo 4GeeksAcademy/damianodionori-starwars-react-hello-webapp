@@ -4,7 +4,11 @@ import { Context } from "../store/appContext";
 import "../../styles/navbar.css";
 
 export const Navbar = () => {
-	const { store } = useContext(Context);
+	const { actions, store } = useContext(Context);
+
+	const handleRemoveFavorite = (uid, linkPath) => {
+		actions.removeFromFavorites(uid, linkPath);
+	  };
 
 	return (
 		<nav className="navbar navbar-light bg-dark mb-3">
@@ -31,17 +35,27 @@ export const Navbar = () => {
 					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 						{store.favorites.length === 0 ? (
 							<li>
-								<span className="dropdown-item">You don't have any favorite yet</span>
+								<span className="dropdown-item">You don't have a favorite yet</span>
 							</li>
 						) : (
 							store.favorites.map((favorite, index) => (
-								<li key={index}>
+								<li key={index} className="d-flex justify-content-between">
 									<Link
 										to={`/information/${favorite.linkPath}/${favorite.uid}`}
 										className="dropdown-item"
 									>
 										{favorite.name}
 									</Link>
+									<span
+										className="text-danger cursor-pointer"
+										onClick={() => handleRemoveFavorite(favorite.uid, favorite.linkPath)}
+									>
+										<img
+											className="trashCan"
+											src="https://static.vecteezy.com/system/resources/previews/000/594/326/original/trash-can-icon-logo-template-illustration-design-vector-eps-10.jpg"
+											alt="Trashcan Icon"
+										/>
+									</span>
 								</li>
 							))
 						)}

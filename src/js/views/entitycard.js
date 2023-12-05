@@ -1,19 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../store/appContext';
 
 const EntityCard = ({ uid, name, linkPath, buttonText }) => {
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [isFavorite, setFavorite] = useState(false);
 
+  useEffect(() => {
+    const isItemInFavorites = store.favorites.some((favorite) => favorite.uid === uid && favorite.linkPath === linkPath);
+    setFavorite(isItemInFavorites);
+  }, [store.favorites, uid, linkPath]);
+
   const handleFavoriteClick = () => {
-    // Toggle local favorite state
     setFavorite((prevFavorite) => !prevFavorite);
-  
-    // Add or remove item from favorites in the global state
-    const itemToAddOrRemove = { uid, name, linkPath, buttonText };
-    actions.addToFavorites(itemToAddOrRemove);
+    if (isFavorite) {
+      actions.removeFromFavorites(uid, linkPath);
+    } else {
+      const item = { uid, name, linkPath, buttonText };
+      actions.addToFavorites(item);
+    }
   };
+
 
   return (
     <div className="col-md-4 p-4 m-3">
