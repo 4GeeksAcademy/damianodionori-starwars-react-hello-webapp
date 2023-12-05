@@ -1,92 +1,130 @@
 const getState = ({ getStore, getActions, setStore }) => {
-
 	return {
-		store: {
-			people: [],
-			planets: [],
-			starships: [],
-			favorites: [],
+	  store: {
+		people: [],
+		planets: [],
+		starships: [],
+		favorites: [],
+	  },
+	  actions: {
+		getPeople: async () => {
+		  const store = getStore();
+		  const textResponse = await fetch('https://www.swapi.tech/api/people');
+		  const jsonResponse = await textResponse.json();
+		  setStore({ ...store, people: jsonResponse.results });
+  
+		  // Store the main data in local storage
+		  localStorage.setItem('starwars_main_data', JSON.stringify({ people: jsonResponse.results, planets: [], starships: [] }));
 		},
-		actions: {
-			getPeople: async () => {
-				const store = getStore();
-				const textResponse = await fetch("https://www.swapi.tech/api/people");
-				const jsonResponse = await textResponse.json();
-				setStore({ ...store, people: jsonResponse.results });
-			},
-
-			getPlanets: async () => {
-				const store = getStore();
-				const textResponse = await fetch("https://www.swapi.tech/api/planets")
-				const jsonResponse = await textResponse.json();
-				setStore({ ...store, planets: jsonResponse.results });
-			},
-
-			getStarships: async () => {
-				const store = getStore();
-				const textResponse = await fetch("https://www.swapi.tech/api/starships");
-				const jsonResponse = await textResponse.json();
-				setStore({ ...store, starships: jsonResponse.results });
-			},
-
-			getPeopleDetails: async () => {
-				const store = getStore();
-
-				const newPeopleWithDetails = await Promise.all(store.people.map(async (person) => {
-					const textResponse = await fetch(person.url);
-					const jsonResponse = await textResponse.json();
-					return { ...person, details: jsonResponse.result };
-				}));
-
-				setStore({ ...store, people: newPeopleWithDetails });
-			},
-
-			getPlanetsDetails: async () => {
-				const store = getStore();
-
-				const newPlanetsWithDetails = await Promise.all(store.planets.map(async (planet) => {
-					const textResponse = await fetch(planet.url);
-					const jsonResponse = await textResponse.json();
-					return { ...planet, details: jsonResponse.result };
-				}));
-
-				setStore({ ...store, planets: newPlanetsWithDetails });
-			},
-			getStarshipsDetails: async () => {
-				const store = getStore();
-
-				const newStarshipsWithDetails = await Promise.all(store.starships.map(async (starship) => {
-					const textResponse = await fetch(starship.url);
-					const jsonResponse = await textResponse.json();
-					return { ...starship, details: jsonResponse.result };
-				}));
-
-				setStore({ ...store, starships: newStarshipsWithDetails });
-			},
-			addToFavorites: (item) => {
-				const store = getStore();
-				const updatedFavorites = [...store.favorites];
-				const { uid, linkPath } = item;
-				const existingIndex = updatedFavorites.findIndex((fav) => fav.uid === uid && fav.linkPath === linkPath);
-
-				if (existingIndex !== -1) {
-					updatedFavorites.splice(existingIndex, 1);
-				} else {
-					updatedFavorites.push(item);
-				}
-
-				setStore({ ...store, favorites: updatedFavorites });
-			},
-			removeFromFavorites: (uid, linkPath) => {
-				const store = getStore();
-				const updatedFavorites = store.favorites.filter((favorite) => !(favorite.uid === uid && favorite.linkPath === linkPath));
-			  
-				setStore({ ...store, favorites: updatedFavorites });
-			  
-				localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-			  },
+  
+		getPlanets: async () => {
+		  const store = getStore();
+		  const textResponse = await fetch('https://www.swapi.tech/api/planets');
+		  const jsonResponse = await textResponse.json();
+		  setStore({ ...store, planets: jsonResponse.results });
+  
+		  // Store the main data in local storage
+		  localStorage.setItem('starwars_main_data', JSON.stringify({ people: [], planets: jsonResponse.results, starships: [] }));
 		},
+  
+		getStarships: async () => {
+		  const store = getStore();
+		  const textResponse = await fetch('https://www.swapi.tech/api/starships');
+		  const jsonResponse = await textResponse.json();
+		  setStore({ ...store, starships: jsonResponse.results });
+  
+		  // Store the main data in local storage
+		  localStorage.setItem('starwars_main_data', JSON.stringify({ people: [], planets: [], starships: jsonResponse.results }));
+		},
+  
+		getPeopleDetails: async () => {
+		  const store = getStore();
+  
+		  const newPeopleWithDetails = await Promise.all(store.people.map(async (person) => {
+			const textResponse = await fetch(person.url);
+			const jsonResponse = await textResponse.json();
+			return { ...person, details: jsonResponse.result };
+		  }));
+  
+		  setStore({ ...store, people: newPeopleWithDetails });
+		},
+  
+		getPlanetsDetails: async () => {
+		  const store = getStore();
+  
+		  const newPlanetsWithDetails = await Promise.all(store.planets.map(async (planet) => {
+			const textResponse = await fetch(planet.url);
+			const jsonResponse = await textResponse.json();
+			return { ...planet, details: jsonResponse.result };
+		  }));
+  
+		  setStore({ ...store, planets: newPlanetsWithDetails });
+		},
+  
+		getStarshipsDetails: async () => {
+		  const store = getStore();
+  
+		  const newStarshipsWithDetails = await Promise.all(store.starships.map(async (starship) => {
+			const textResponse = await fetch(starship.url);
+			const jsonResponse = await textResponse.json();
+			return { ...starship, details: jsonResponse.result };
+		  }));
+  
+		  setStore({ ...store, starships: newStarshipsWithDetails });
+		},
+  
+		addToFavorites: (item) => {
+		  const store = getStore();
+		  const updatedFavorites = [...store.favorites];
+		  const { uid, linkPath } = item;
+		  const existingIndex = updatedFavorites.findIndex((fav) => fav.uid === uid && fav.linkPath === linkPath);
+  
+		  if (existingIndex !== -1) {
+			updatedFavorites.splice(existingIndex, 1);
+		  } else {
+			updatedFavorites.push(item);
+		  }
+  
+		  setStore({ ...store, favorites: updatedFavorites });
+		  localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+		},
+  
+		removeFromFavorites: (uid, linkPath) => {
+		  const store = getStore();
+		  const updatedFavorites = store.favorites.filter(
+			(favorite) => !(favorite.uid === uid && favorite.linkPath === linkPath)
+		  );
+  
+		  setStore({ ...store, favorites: updatedFavorites });
+  
+		  localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+		},
+  
+		initialize: () => {
+		  // Check if there is data in local storage
+		  const storedData = localStorage.getItem('starwars_data');
+  
+		  if (storedData) {
+			// If data exists, set the store with the stored data
+			setStore(JSON.parse(storedData));
+		  } else {
+			// If no data in local storage, check if there's main data
+			const mainData = localStorage.getItem('starwars_main_data');
+  
+			if (mainData) {
+			  // If main data exists, set the store with the stored main data
+			  setStore(JSON.parse(mainData));
+			} else {
+			  // If no main data in local storage, fetch data from API and update the store
+			  getActions().getPeople();
+			  getActions().getPlanets();
+			  getActions().getStarships();
+			}
+		  }
+		},
+	  },
 	};
-};
-
-export default getState;
+  };
+  
+  export default getState;
+  

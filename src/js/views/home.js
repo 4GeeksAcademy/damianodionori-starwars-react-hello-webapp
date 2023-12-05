@@ -39,10 +39,10 @@ export const Home = () => {
 		<p className="text-center">App's loading data from the API, please wait...</p>
 	) : (
 		<div className="text-center mt-5">
-			<h1>Welcome to Starwarspedia!</h1>
+			<h1 className="display-3 mb-4">Welcome to Starwarspedia!</h1>
 
 			<div className="m-3 p-3">
-				<h2>Characters:</h2>
+				<h2 className="display-4 mb-3">Characters:</h2>
 				<div className="d-flex overflow-auto ">
 					{store.people.map((person) => (
 						<EntityCard
@@ -57,7 +57,7 @@ export const Home = () => {
 			</div>
 
 			<div className="m-3 p-3">
-				<h2>Planets:</h2>
+				<h2 className="display-4 mb-3">Planets:</h2>
 				<div className="d-flex overflow-auto">
 					{store.planets.map((planet) => (
 						<EntityCard
@@ -72,7 +72,7 @@ export const Home = () => {
 			</div>
 
 			<div className="m-3 p-3">
-				<h2>Starships:</h2>
+				<h2 className="display-4 mb-3">Starships:</h2>
 				<div className="d-flex overflow-auto">
 					{store.starships.map((starship) => (
 						<EntityCard
