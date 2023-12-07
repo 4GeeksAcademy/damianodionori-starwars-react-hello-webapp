@@ -8,34 +8,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 	  },
 	  actions: {
 		getPeople: async () => {
-		  const store = getStore();
-		  const textResponse = await fetch('https://www.swapi.tech/api/people');
-		  const jsonResponse = await textResponse.json();
-		  setStore({ ...store, people: jsonResponse.results });
+			const textResponse = await fetch('https://www.swapi.tech/api/people');
+			const jsonResponse = await textResponse.json();
+			setStore({ ...getStore(), people: jsonResponse.results });
+	
+			localStorage.setItem('starwars_main_data', JSON.stringify({ people: jsonResponse.results, planets: [], starships: [] }));
+		  },
   
-		  // Store the main data in local storage
-		  localStorage.setItem('starwars_main_data', JSON.stringify({ people: jsonResponse.results, planets: [], starships: [] }));
-		},
+		  getPlanets: async () => {
+			const textResponse = await fetch('https://www.swapi.tech/api/planets');
+			const jsonResponse = await textResponse.json();
+			setStore({ ...getStore(), planets: jsonResponse.results });
+	
+			localStorage.setItem('starwars_main_data', JSON.stringify({ people: [], planets: jsonResponse.results, starships: [] }));
+		  },
   
-		getPlanets: async () => {
-		  const store = getStore();
-		  const textResponse = await fetch('https://www.swapi.tech/api/planets');
-		  const jsonResponse = await textResponse.json();
-		  setStore({ ...store, planets: jsonResponse.results });
-  
-		  // Store the main data in local storage
-		  localStorage.setItem('starwars_main_data', JSON.stringify({ people: [], planets: jsonResponse.results, starships: [] }));
-		},
-  
-		getStarships: async () => {
-		  const store = getStore();
-		  const textResponse = await fetch('https://www.swapi.tech/api/starships');
-		  const jsonResponse = await textResponse.json();
-		  setStore({ ...store, starships: jsonResponse.results });
-  
-		  // Store the main data in local storage
-		  localStorage.setItem('starwars_main_data', JSON.stringify({ people: [], planets: [], starships: jsonResponse.results }));
-		},
+		  getStarships: async () => {
+			const textResponse = await fetch('https://www.swapi.tech/api/starships');
+			const jsonResponse = await textResponse.json();
+			setStore({ ...getStore(), starships: jsonResponse.results });
+	
+			localStorage.setItem('starwars_main_data', JSON.stringify({ people: [], planets: [], starships: jsonResponse.results }));
+		  },
   
 		getPeopleDetails: async () => {
 		  const store = getStore();
@@ -101,21 +95,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
   
 		initialize: () => {
-		  // Check if there is data in local storage
 		  const storedData = localStorage.getItem('starwars_data');
   
 		  if (storedData) {
-			// If data exists, set the store with the stored data
 			setStore(JSON.parse(storedData));
 		  } else {
-			// If no data in local storage, check if there's main data
 			const mainData = localStorage.getItem('starwars_main_data');
   
 			if (mainData) {
-			  // If main data exists, set the store with the stored main data
-			  setStore(JSON.parse(mainData));
+			  const parsedMainData = JSON.parse(mainData);
+			  if (parsedMainData.people.length || parsedMainData.planets.length || parsedMainData.starships.length) {
+				setStore(parsedMainData);
+			  }
 			} else {
-			  // If no main data in local storage, fetch data from API and update the store
 			  getActions().getPeople();
 			  getActions().getPlanets();
 			  getActions().getStarships();

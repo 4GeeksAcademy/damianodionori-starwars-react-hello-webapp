@@ -28,10 +28,10 @@ export const Home = () => {
 	}
 
 	useEffect(() => {
-		if (!store.people.length || !store.planets.length || !store.starships.length) {
-			handleAsyncCalls();
+		if (!(store.people.length && store.planets.length && store.starships.length)) {
+		  handleAsyncCalls();
 		}
-	}, []);
+	  }, []);
 
 	console.log(store);
 
